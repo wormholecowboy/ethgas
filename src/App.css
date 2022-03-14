@@ -36,3 +36,33 @@
     transform: rotate(360deg);
   }
 }
+
+#divStyle1 {
+  background-color: blue;
+  color: white;
+  width: 100px;
+  height: 100px;
+}
+#divStyle2 {
+  background-color: rgb(77, 2, 83);
+  width: 100px;
+  height: 100px;
+}
+#divStyle3 {
+  background-color: yellow;
+  width: 100px;
+  height: 100px;
+}
+#divStyle4 {
+  background-color: green;
+  width: 100px;
+  height: 100px;
+}
+
+#mainDiv {
+  width: 800px;
+  height: 800px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

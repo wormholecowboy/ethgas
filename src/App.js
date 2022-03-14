@@ -1,4 +1,5 @@
 import './App.css';
+import React from 'react';
 import { useEffect, useState } from 'react';
 
 const API_KEY = process.env.REACT_APP_ES_API_KEY;
@@ -23,42 +24,24 @@ function App() {
     (async () => await grabGas())();
   }, []);
 
-  const divStyle1 = {
-    backgroundColor: 'blue',
-    width: '100px',
-    heigh: '100px',
-  };
-  const divStyle2 = {
-    backgroundColor: 'red',
-    width: '100px',
-    heigh: '100px',
-  };
-  const divStyle3 = {
-    backgroundColor: 'yellow',
-    width: '100px',
-    heigh: '100px',
-  };
-  const divStyle4 = {
-    backgroundColor: 'green',
-    width: '100px',
-    heigh: '100px',
+  const mainDiv = {
+    display: 'flex',
+    'background-color': 'red',
   };
 
-  const mainDiv = {
-    width: '800px',
-    height: '800px',
-    display: 'flex',
+  const div1 = {
+    'background-color': 'blue',
+    color: 'white',
   };
 
   // use this to set timer: https://upmostly.com/tutorials/setinterval-in-react-components-using-hooks
 
   return (
-    <div className="App">
-      <div>{JSON.stringify(gas)}</div>
-      <div style={divStyle1}>Block: {gas.LastBlock}</div>
-      <div style={divStyle2}>Low: {gas.SafeGasPrice}</div>
-      <div style={divStyle3}>Average: {gas.ProposeGasPrice}</div>
-      <div style={divStyle4}>Fast: {gas.FastGasPrice}</div>
+    <div className="App" style={mainDiv}>
+      <div style={div1}>Block: {gas.LastBlock}</div>
+      <div id="divStyle2">Low: {gas.SafeGasPrice}</div>
+      <div>Average: {gas.ProposeGasPrice}</div>
+      <div>Fast: {gas.FastGasPrice}</div>
     </div>
   );
 }
