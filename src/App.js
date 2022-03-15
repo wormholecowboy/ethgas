@@ -1,5 +1,4 @@
 import './App.css';
-import React from 'react';
 import { useEffect, useState } from 'react';
 
 const API_KEY = process.env.REACT_APP_ES_API_KEY;
@@ -14,34 +13,41 @@ function App() {
       const listItems = await res.json();
       console.log(listItems);
       setGas(listItems.result);
-      console.log(`gas variable: ${JSON.stringify(gas)}`);
     } catch (err) {
       console.error(err.stack);
     }
   };
 
   useEffect(() => {
-    (async () => await grabGas())();
+    const interval = setInterval(() => {
+      grabGas();
+    }, 13000);
   }, []);
 
-  const mainDiv = {
-    display: 'flex',
-    'background-color': 'red',
-  };
+  // useEffect(() => {
+  //   (async () => await grabGas())();
+  // }, []);
 
-  const div1 = {
-    'background-color': 'blue',
-    color: 'white',
-  };
+  // setInterval(() => setGas(), 10000);
 
   // use this to set timer: https://upmostly.com/tutorials/setinterval-in-react-components-using-hooks
 
+  // ADD: OpenSea sale, Uniswap V3, USDT Transfer, USDC Transfer
+
   return (
-    <div className="App" style={mainDiv}>
-      <div style={div1}>Block: {gas.LastBlock}</div>
-      <div id="divStyle2">Low: {gas.SafeGasPrice}</div>
-      <div>Average: {gas.ProposeGasPrice}</div>
-      <div>Fast: {gas.FastGasPrice}</div>
+    <div id="mainDiv" className="App">
+      <div id="divStyle1" class="infoTile">
+        Block: {gas.LastBlock}
+      </div>
+      <div id="divStyle2" class="infoTile">
+        Low: {gas.SafeGasPrice} gwei
+      </div>
+      <div id="divStyle3" class="infoTile">
+        Average: {gas.ProposeGasPrice} gwei
+      </div>
+      <div id="divStyle4" class="infoTile">
+        Fast: {gas.FastGasPrice} gwei
+      </div>
     </div>
   );
 }
