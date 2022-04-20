@@ -1,5 +1,6 @@
 import './App.css';
 import { useEffect, useState } from 'react';
+import React from 'react';
 
 const API_KEY = process.env.REACT_APP_ES_API_KEY;
 const apiURL = `https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=${API_KEY}`;
