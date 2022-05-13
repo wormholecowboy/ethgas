@@ -41,7 +41,7 @@ function App() {
         Block: {gas.LastBlock}
       </div>
       <div id="divStyle2" class="infoTile">
-        Low: {gas.SafeGasPrice} gwei
+        Slow: {gas.SafeGasPrice} gwei
       </div>
       <div id="divStyle3" class="infoTile">
         Average: {gas.ProposeGasPrice} gwei
