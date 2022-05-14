@@ -1,3 +1,12 @@
+/* 
+TODO: add mobile resp
+TODO: add prices for opensea, uniswap, USDC or USDT
+TODO: add time estimates for each speed
+TODO: add base fee and tipping?
+TODO: add countdown timer
+
+*/
+
 import './App.css';
 import { useEffect, useState } from 'react';
 import React from 'react';
@@ -12,7 +21,6 @@ function App() {
     try {
       const res = await fetch(apiURL);
       const listItems = await res.json();
-      console.log(listItems);
       setGas(listItems.result);
     } catch (err) {
       console.error(err.stack);
@@ -20,34 +28,51 @@ function App() {
   };
 
   useEffect(() => {
+    grabGas();
     const interval = setInterval(() => {
       grabGas();
     }, 13000);
   }, []);
-
-  // useEffect(() => {
-  //   (async () => await grabGas())();
-  // }, []);
-
-  // setInterval(() => setGas(), 10000);
 
   // use this to set timer: https://upmostly.com/tutorials/setinterval-in-react-components-using-hooks
 
   // ADD: OpenSea sale, Uniswap V3, USDT Transfer, USDC Transfer
 
   return (
-    <div id="mainDiv" className="App">
-      <div id="divStyle1" class="infoTile">
-        Block: {gas.LastBlock}
+    <div class="mainDiv">
+      <div>
+        <div class="headerText">
+          <h1>Simple Ethereum Gas Tracker</h1>
+        </div>
       </div>
-      <div id="divStyle2" class="infoTile">
-        Slow: {gas.SafeGasPrice} gwei
+      <div id="section1">
+        <div id="divStyle1" class="infoTile">
+          <strong>Block</strong>
+          <div>
+            <div class="blockNum">{gas.LastBlock}</div>
+          </div>
+        </div>
+        <div id="divStyle2" class="infoTile">
+          Slow{' '}
+          <div>
+            <div class="gwei">{gas.SafeGasPrice}</div>
+          </div>
+        </div>
+        <div id="divStyle3" class="infoTile">
+          Average{' '}
+          <div>
+            <div class="gwei">{gas.ProposeGasPrice}</div>
+          </div>
+        </div>
+        <div id="divStyle4" class="infoTile">
+          Fast{' '}
+          <div>
+            <div class="gwei">{gas.FastGasPrice}</div>
+          </div>
+        </div>
       </div>
-      <div id="divStyle3" class="infoTile">
-        Average: {gas.ProposeGasPrice} gwei
-      </div>
-      <div id="divStyle4" class="infoTile">
-        Fast: {gas.FastGasPrice} gwei
+      <div class="section2">
+        <div class="commonPrices">Common Prices</div>
       </div>
     </div>
   );
