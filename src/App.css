@@ -18,26 +18,21 @@
 
 .section2 {
   width: 50vw;
-  height: 15vw;
+  height: 20vw;
   margin: 5vh auto;
-  display: grid;
   padding-top: 3vh;
   padding-bottom: 3vh;
-  grid-template-columns: 30% 15% 15% 15%;
-  grid-template-rows: repeat(4, 10%);
-  justify-items: center;
-  justify-content: center;
-  align-items: center;
   background-color: rgb(237, 234, 215);
   border-radius: 1em;
   box-shadow: 0.5em 0.5em 2em -1.2em;
   font-family: Helvetica, Arial, sans-serif;
+  text-align: center;
 }
 
 .headerText {
   display: flex;
-  justify-content: center;
-  align-content: center;
+  flex-direction: column;
+  text-align: center;
   padding-top: 20px;
 }
 
@@ -54,11 +49,12 @@
 }
 
 #divStyle1 {
-  background-color: rgb(125, 125, 204);
+  background-color: rgb(144, 144, 169);
   height: 50px;
   width: minmax(200px, 10vw);
   grid-column: 1 / 4;
   grid-row: 1 / 2;
+  border-radius: 0.5em;
 }
 
 #divStyle2 {
@@ -82,8 +78,14 @@
   margin-top: 10px;
 }
 
-.commonPrices {
-  color: black;
-  grid-column: 3/4;
-  grid-row: 1/2;
+table {
+  margin: 5px auto;
+}
+
+td {
+  padding: 5px;
+}
+
+th {
+  width: 100px;
 }
