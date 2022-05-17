@@ -1,8 +1,6 @@
 /* 
-TODO: add mobile resp
 TODO: add time estimates for each speed
 TODO: add countdown timer
-TODO: add tx check
 
 */
 
@@ -13,7 +11,6 @@ import React from 'react';
 const API_KEY = process.env.REACT_APP_ES_API_KEY;
 const gasOracle = `https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=${API_KEY}`;
 const lastEtherPrice = `https://api.etherscan.io/api?module=stats&action=ethprice&apikey=${API_KEY}`;
-const checkExecStatus = `https://api.etherscan.io/api?module=transaction&txhash=0x15f8e5ea1079d9a0bb04a4c58ae5fe7654b5b2b4463375ff7ffb490aa0032f3a&apikey=${API_KEY}`;
 
 function App() {
   const [gas, setGas] = useState([]);
@@ -27,7 +24,7 @@ function App() {
       const getEthPrice = await fetch(lastEtherPrice);
       const ethPriceItems = await getEthPrice.json();
       setPrice(ethPriceItems.result);
-      // console.log({ ethPriceItems });
+      console.log(price.ethusd);
     } catch (err) {
       console.error(err.stack);
     }
@@ -35,9 +32,12 @@ function App() {
 
   useEffect(() => {
     grabGas();
-    const interval = setInterval(() => {
-      grabGas();
-    }, 13000);
+    const interval = async () => {
+      setInterval(() => {
+        grabGas();
+      }, 13000);
+    };
+    interval();
   }, []);
 
   // use this to set timer: https://upmostly.com/tutorials/setinterval-in-react-components-using-hooks
