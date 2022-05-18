@@ -9,9 +9,9 @@ import './App.css';
 import { useEffect, useState } from 'react';
 import React from 'react';
 
-const API_KEY = process.env.REACT_APP_ES_API_KEY;
-const gasOracle = `https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=${API_KEY}`;
-const lastEtherPrice = `https://api.etherscan.io/api?module=stats&action=ethprice&apikey=${API_KEY}`;
+const REACT_APP_API_KEY = process.env.REACT_APP_API_KEY;
+const gasOracle = `https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=${REACT_APP_API_KEY}`;
+const lastEtherPrice = `https://api.etherscan.io/api?module=stats&action=ethprice&apikey=${REACT_APP_API_KEY}`;
 
 function App() {
   const [gas, setGas] = useState([]);
@@ -22,16 +22,16 @@ function App() {
     try {
       const res = await fetch(gasOracle);
       const listItems = await res.json();
-      const c = await setGas(listItems.result);
-      await c;
+      await setGas(listItems.result);
       // grab price too
       const getEthPrice = await fetch(lastEtherPrice);
       const ethPriceItems = await getEthPrice.json();
-      const b = await setPrice(ethPriceItems.result);
-      await b;
+      setPrice(ethPriceItems.result);
       //
       console.log('this is the price', price.ethusd);
       console.log('this is the gas', gas.SafeGasPrice);
+      console.log({ price });
+      console.log(REACT_APP_API_KEY);
     } catch (err) {
       console.error(err.stack);
     }
@@ -49,14 +49,10 @@ function App() {
     const interval = () => {
       setInterval(() => {
         grabGas();
-      }, 5000);
+      }, 13000);
     };
     interval();
   }, []);
-
-  // use this to set timer: https://upmostly.com/tutorials/setinterval-in-react-components-using-hooks
-
-  // ADD: OpenSea sale, Uniswap V3, USDT Transfer, USDC Transfer
 
   return (
     <div className="mainDiv">
