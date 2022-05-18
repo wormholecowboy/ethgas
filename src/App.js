@@ -1,6 +1,7 @@
 /* 
 TODO: add time estimates for each speed
 TODO: add countdown timer
+TODO: add title tag
 
 */
 
@@ -15,27 +16,40 @@ const lastEtherPrice = `https://api.etherscan.io/api?module=stats&action=ethpric
 function App() {
   const [gas, setGas] = useState([]);
   const [price, setPrice] = useState([]);
+  const [countdown, setCountdown] = useState(0);
 
   const grabGas = async () => {
     try {
       const res = await fetch(gasOracle);
       const listItems = await res.json();
-      setGas(listItems.result);
+      const c = await setGas(listItems.result);
+      await c;
+      // grab price too
       const getEthPrice = await fetch(lastEtherPrice);
       const ethPriceItems = await getEthPrice.json();
-      setPrice(ethPriceItems.result);
-      console.log(price.ethusd);
+      const b = await setPrice(ethPriceItems.result);
+      await b;
+      //
+      console.log('this is the price', price.ethusd);
+      console.log('this is the gas', gas.SafeGasPrice);
     } catch (err) {
       console.error(err.stack);
     }
   };
 
+  // setCountdown(13);
+  // let a = setInterval(() => {
+  //   setCountdown(countdown - 1);
+  //   console.log(countdown);
+  //   console.log(`this is timer: ${a}`);
+  // }, 1000);
+
   useEffect(() => {
     grabGas();
-    const interval = async () => {
+    const interval = () => {
       setInterval(() => {
         grabGas();
-      }, 13000);
+      }, 5000);
     };
     interval();
   }, []);
@@ -50,6 +64,7 @@ function App() {
         <div className="headerText">
           <h1>Simple Ethereum Gas Tracker</h1>
           <h2>ETH is ${price.ethusd} right meow.😼</h2>
+          <div>{countdown}</div>
         </div>
       </div>
       <div id="section1">
