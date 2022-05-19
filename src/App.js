@@ -16,7 +16,7 @@ const lastEtherPrice = `https://api.etherscan.io/api?module=stats&action=ethpric
 function App() {
   const [gas, setGas] = useState([]);
   const [price, setPrice] = useState([]);
-  const [countdown, setCountdown] = useState(0);
+  let [countdown, setCountdown] = useState(0);
 
   const grabGas = async () => {
     try {
@@ -44,14 +44,24 @@ function App() {
   //   console.log(`this is timer: ${a}`);
   // }, 1000);
 
+  let timer;
+
   useEffect(() => {
-    grabGas();
-    const interval = () => {
+    clearInterval(timer);
+    setCountdown = 13;
+    timer = setInterval(() => {
+      setCountdown(countdown - 1);
+    }, 1000);
+  }, [gas]);
+
+  useEffect(() => {
+    let thingy = async () => {
+      await grabGas();
       setInterval(() => {
         grabGas();
       }, 13000);
     };
-    interval();
+    thingy();
   }, []);
 
   return (
