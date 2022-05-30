@@ -1,7 +1,8 @@
 /* 
-TODO: add time estimates for each speed
-TODO: add countdown timer
-TODO: add title tag
+TODO: fix price tracker in prod
+TODO: force 2 decimals for ETH price
+TODO: add background zen pic
+TODO: double check repsonsiveness
 
 */
 
@@ -28,10 +29,7 @@ function App() {
       const ethPriceItems = await getEthPrice.json();
       setPrice(ethPriceItems.result);
       //
-      console.log('this is the price', price.ethusd);
-      console.log('this is the gas', gas.SafeGasPrice);
-      console.log({ price });
-      console.log(REACT_APP_API_KEY);
+      console.log('price var: ', { price });
     } catch (err) {
       console.error(err.stack);
     }
@@ -47,19 +45,21 @@ function App() {
   useEffect(() => {
     setCountdown(13);
     let timer = setInterval(() => {
-      setCountdown(countdown--);
+      setCountdown((prev) => prev - 1);
+      console.log('countdown var: ', countdown);
     }, 1000);
+
     return () => clearInterval(timer);
   }, [gas]);
 
   useEffect(() => {
-    let thingy = async () => {
+    let startGasInterval = async () => {
       await grabGas();
       setInterval(() => {
         grabGas();
       }, 13000);
     };
-    thingy();
+    startGasInterval();
   }, []);
 
   return (
@@ -67,8 +67,8 @@ function App() {
       <div>
         <div className="headerText">
           <h1>Simple Ethereum Gas Tracker</h1>
-          <h2>ETH is ${price.ethusd} right meow.😼</h2>
-          <div>{countdown}</div>
+          <h2>ETH is ${Number(price.ethusd).toFixed(2)} right meow.😼</h2>
+          <div>{countdown} seconds until hopefully cheaper gas</div>
         </div>
       </div>
       <div id="section1">
