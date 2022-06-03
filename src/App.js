@@ -27,26 +27,20 @@ function App() {
       // grab price too
       const getEthPrice = await fetch(lastEtherPrice);
       const ethPriceItems = await getEthPrice.json();
-      setPrice(ethPriceItems.result);
+      const ethGasString = ethPriceItems.result.ethusd;
+      const ethGasNumber = parseInt(ethGasString);
+      const ethGasStringFixed = ethGasNumber.toFixed(0);
+      setPrice(ethGasStringFixed);
       //
-      console.log('price var: ', { price });
     } catch (err) {
       console.error(err.stack);
     }
   };
 
-  // setCountdown(13);
-  // let a = setInterval(() => {
-  //   setCountdown(countdown - 1);
-  //   console.log(countdown);
-  //   console.log(`this is timer: ${a}`);
-  // }, 1000);
-
   useEffect(() => {
     setCountdown(13);
     let timer = setInterval(() => {
       setCountdown((prev) => prev - 1);
-      console.log('countdown var: ', countdown);
     }, 1000);
 
     return () => clearInterval(timer);
@@ -66,8 +60,8 @@ function App() {
     <div className="mainDiv">
       <div>
         <div className="headerText">
-          <h1>Simple Ethereum Gas Tracker</h1>
-          <h2>ETH is ${Number(price.ethusd).toFixed(2)} right meow.😼</h2>
+          <h1>Zen Ethereum Gas Tracker</h1>
+          <h2>ETH is ${price} right meow.😼</h2>
           <div>{countdown} seconds until hopefully cheaper gas</div>
         </div>
       </div>

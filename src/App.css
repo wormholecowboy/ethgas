@@ -1,3 +1,22 @@
+/* .mainDiv {
+  width: 1299px;
+  margin: auto auto;
+  background-image: url('/suzuki.jpeg');
+  background-repeat: no-repeat;
+  background-color: rgba(255, 255, 255, 0.7);
+  background-blend-mode: lighten;
+} */
+
+html {
+  background: url('/suzuki.jpeg') no-repeat center center fixed;
+  background-color: rgba(255, 255, 255, 0.8);
+  background-blend-mode: lighten;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
 #section1 {
   width: 50vw;
   height: 25vw;
@@ -10,7 +29,7 @@
   justify-items: center;
   justify-content: center;
   align-items: center;
-  background-color: rgb(237, 234, 215);
+  background-color: rgb(237, 234, 215, 0);
   border-radius: 1em;
   box-shadow: 0.5em 0.5em 2em -1.2em;
   font-family: Helvetica, Arial, sans-serif;
@@ -34,6 +53,7 @@
   flex-direction: column;
   text-align: center;
   padding-top: 20px;
+  font-family: 'Zen Maru Gothic', sans-serif;
 }
 
 .infoTile {
@@ -46,6 +66,7 @@
   text-align: center;
   position: relative;
   z-index: 2;
+  font-family: 'Zen Maru Gothic', sans-serif;
 }
 
 #divStyle1 {
@@ -75,11 +96,12 @@
 
 .gwei {
   font-size: 4rem;
-  margin-top: 10px;
+  margin-top: -5px;
   display: flex;
   justify-content: center;
   align-content: center;
   align-items: center;
+  font-family: 'Zen Maru Gothic', sans-serif;
 }
 
 table {
