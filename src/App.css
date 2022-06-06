@@ -8,7 +8,7 @@
 } */
 
 html {
-  background: url('/suzuki.jpeg') no-repeat center center fixed;
+  background: url('/public/suzuki.jpeg') no-repeat center center fixed;
   background-color: rgba(255, 255, 255, 0.8);
   background-blend-mode: lighten;
   -webkit-background-size: cover;
